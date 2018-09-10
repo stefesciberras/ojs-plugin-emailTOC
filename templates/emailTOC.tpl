@@ -32,9 +32,7 @@
 </head>
 <body>
 <div class="header">
-Please add notifications@mmsjournals.org to your Safe Senders list.
-<p>Browse the latest Table of Contents from <a href="{url router=$smarty.const.ROUTE_PAGE op="view" page="issue" path=$issue->getBestIssueId()}">{$journal->getName($locale)} </a><p>
-<p>In this issue of the {$journal->getName($locale)}, Vol {$issue->getVolume()}, Issue {$issue->getNumber()}, {$issue->getYear()}</p>
+<p style="font-size: smaller">Please add notifications@mmsjournals.org to your Safe Senders list.<p>
 </div>
 <header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
   <div class="pkp_head_wrapper">
@@ -75,6 +73,9 @@ Please add notifications@mmsjournals.org to your Safe Senders list.
     </div>
   </div>
 </header>
+
+<p>Browse the latest Table of Contents from <a href="{url router=$smarty.const.ROUTE_PAGE op="view" page="issue" path=$issue->getBestIssueId()}">{$journal->getName($locale)} </a><p>
+<p>Vol {$issue->getVolume()}, Issue {$issue->getNumber()}, {$issue->getYear()}</p>
 
  <div class="obj_issue_toc" style="display: flex;   flx-wrap: wrap-reverse;">
  	{* Articles *}
@@ -123,8 +124,18 @@ Please add notifications@mmsjournals.org to your Safe Senders list.
  	</div><!-- .sections -->
   {* Issue introduction area above articles *}
   <div class="heading">
+   <p style="text-align: center">Vol {$issue->getVolume()}, Issue {$issue->getNumber()}, {$issue->getYear()}</p>
+
+    {* Issue cover image *}
+    {assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
+    {if $issueCover}
+      <a class="cover" href="{url router=$smarty.const.ROUTE_PAGE op="view" page="issue" path=$issue->getBestIssueId()}">
+        <img src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
+      </a>
+    {/if}
+
     {* Published date *}
-   {if $issue->getDatePublished()}
+    {if $issue->getDatePublished()}
      <div class="published">
        <span class="label">
          {translate key="submissions.published"}:
@@ -133,14 +144,6 @@ Please add notifications@mmsjournals.org to your Safe Senders list.
          {$issue->getDatePublished()|date_format:$dateFormatShort}
        </span>
      </div>
-   {/if}
-
-    {* Issue cover image *}
-    {assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
-    {if $issueCover}
-      <a class="cover" href="{url router=$smarty.const.ROUTE_PAGE op="view" page="issue" path=$issue->getBestIssueId()}">
-        <img src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
-      </a>
     {/if}
 
     {* Description *}
@@ -152,6 +155,8 @@ Please add notifications@mmsjournals.org to your Safe Senders list.
   </div>
  </div>
 <div>
-<p>You have received this email because you have subscribed to our mailing list. To unsubscribe, click here to access your user profile, then go to Notifications settings.</p>
+  <br>
+  <br>
+<p style="font-size:smaller">You have received this email because you have subscribed to our mailing list. To unsubscribe, click <a href="{url router=$smarty.const.ROUTE_PAGE page="user" path="profile}">here</a> to access your user profile, then go to Notifications settings.</p>
 </div>
 </body>
