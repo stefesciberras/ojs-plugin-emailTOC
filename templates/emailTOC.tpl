@@ -32,10 +32,6 @@
 </head>
 <body>
 <div class="header">
-{include file="templates/frontend/components/test.tpl"}
-{include file="frontend/components/test.tpl"}
-{include file="components/test.tpl"}
-{include file="./components/test.tpl"}
 Please add notifications@mmsjournals.org to your Safe Senders list.
 <p>Browse the latest Table of Contents from <a href="{url router=$smarty.const.ROUTE_PAGE op="view" page="issue" path=$issue->getBestIssueId()}">{$journal->getName($locale)} </a><p>
 <p>In this issue of the {$journal->getName($locale)}, Vol {$issue->getVolume()}, Issue {$issue->getNumber()}, {$issue->getYear()}</p>
